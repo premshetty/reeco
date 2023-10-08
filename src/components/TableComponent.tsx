@@ -71,7 +71,7 @@ const TableComponent = () => {
                     <tbody className=''>
 
                         {
-                            filteredProducts.length > 1 ?
+                            filteredProducts.length >= 1 ?
                                 filteredProducts?.map((row: TableRowProps) => {
                                     return <TableRow
                                         brand={row.brand}
