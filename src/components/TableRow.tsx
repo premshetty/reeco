@@ -1,41 +1,31 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditModal from './EditModal';
 import UrgentModal from './UrgentModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProducts, setProducts } from '@/redux/productSlice';
+import { Product, selectProducts, setProducts } from '@/redux/productSlice';
 
-export interface TableRowProps {
-    product_name: string;
-    brand: string;
-    price: string;
-    quantity: string;
-    total: string;
-    id?: number
-    rowId?: number
-    status?: Status
-}
 
 export type Status = 'Missing-urgent' | 'Approved' | 'Missing' | 'Price Updated' | 'Quality Updated' | 'none';
 
 
-const TableRow: React.FC<TableRowProps> = ({
-    product_name,
-    brand,
-    price,
-    quantity,
-    total,
-    rowId,
-    status
-
-}) => {
+const TableRow = ({ rowId }: { rowId: number }) => {
 
 
     const [editOepn, seteditOepn] = useState<boolean>(false);
     const [urgentOpen, seturgentOpen] = useState<boolean>(false);
     const productStore = useSelector(selectProducts);
 
+    const [currentRow, setCurrentRow] = useState<Product>({
+        brand: '',
+        price: '',
+        product_name: '',
+        quantity: '',
+        total: '',
+        id: 0,
+        status: 'none'
+    });
     const dispatch = useDispatch();
 
     const setStatus = (status: Status) => {
@@ -45,11 +35,15 @@ const TableRow: React.FC<TableRowProps> = ({
 
         dispatch(setProducts(updatedProducts));
     }
+    useEffect(() => {
+        const filteredProduct = productStore.find((product) => product.id === rowId) ?? currentRow;
+        setCurrentRow(filteredProduct);
+    }, [productStore, rowId]);
 
 
     let bgColor: string;
 
-    switch (status) {
+    switch (currentRow?.status) {
         case 'Missing-urgent':
             bgColor = '#d32f2f';
             break;
@@ -63,7 +57,7 @@ const TableRow: React.FC<TableRowProps> = ({
     }
 
     const StatusPill = () => {
-        if (status === 'none') {
+        if (currentRow?.status === 'none') {
             return null;
         }
 
@@ -72,7 +66,7 @@ const TableRow: React.FC<TableRowProps> = ({
                 style={{ backgroundColor: bgColor }}
                 className={`h-7 rounded-full text-white px-6 min-w-max`}
             >
-                {status}
+                {currentRow?.status}
             </button>
         );
     };
@@ -80,14 +74,14 @@ const TableRow: React.FC<TableRowProps> = ({
     return (
         <tr style={{ boxShadow: '0px 2px 0px 0px #d1d5db' }} className='text-gray-500 font-normal border-gray-300 min-h-[40px] space-x-4'>
             <td className='max-w-[300px] text-sm'>
-                <Image alt={product_name} src={'/Avocado.jpg'}
+                <Image alt={currentRow?.product_name} src={'/Avocado.jpg'}
                     className='w-[30px!important] min-w-[30px]' height={30} width={30} />
             </td>
-            <td className='max-w-[300px] text-sm w-[300px]'>{product_name}</td>
-            <td className='max-w-[300px] text-sm w-[150px]'>{brand}</td>
-            <td className='max-w-[300px] whitespace-nowrap text-sm'>{`${price} / 6*1LB`}</td>
-            <td className='max-w-[300px] text-sm whitespace-nowrap'>{`${quantity} x6*1LB`}</td>
-            <td className='max-w-[300px] text-sm'>{total}</td>
+            <td className='max-w-[300px] text-sm w-[300px]'>{currentRow?.product_name}</td>
+            <td className='max-w-[300px] text-sm w-[150px]'>{currentRow?.brand}</td>
+            <td className='max-w-[300px] whitespace-nowrap text-sm'>{`${currentRow?.price} / 6*1LB`}</td>
+            <td className='max-w-[300px] text-sm whitespace-nowrap'>{`${currentRow?.quantity} x6*1LB`}</td>
+            <td className='max-w-[300px] text-sm'>{currentRow?.total}</td>
             <td className='max-w-[300px] text-sm '>
                 <StatusPill />
             </td>
@@ -107,14 +101,6 @@ const TableRow: React.FC<TableRowProps> = ({
                 </div>
             </td>
             <EditModal
-                brand={brand}
-                price={price}
-                product_name={product_name}
-                quantity={quantity}
-                total={total}
-
-
-
                 rowId={rowId ?? 0}
                 open={editOepn} setOpen={seteditOepn} />
             <UrgentModal setStatus={setStatus} open={urgentOpen} setOpen={seturgentOpen} />

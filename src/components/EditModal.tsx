@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Status, TableRowProps } from './TableRow';
+
 import { Icon } from '@iconify/react/dist/iconify.js';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,14 +14,19 @@ type Props = {
 const EditModal = ({
     open,
     setOpen,
-    product_name,
     rowId,
-    brand,
-    total,
-}: Props & TableRowProps) => {
+}: Props) => {
     const dispatch = useDispatch();
     const productStore = useSelector(selectProducts);
-    const [editProcut, seteditProcut] = useState<Product>();
+    const [editProcut, seteditProcut] = useState<Product>({
+        brand: '',
+        price: '',
+        product_name: '',
+        quantity: '',
+        total: '',
+        id: 0,
+        status: 'none'
+    });
 
     console.log(editProcut)
     const incrementQuantity = () => {
@@ -43,7 +48,7 @@ const EditModal = ({
         }
     };
     useEffect(() => {
-        const filteredProduct = productStore.find((product) => product.id === rowId);
+        const filteredProduct = productStore.find((product) => product.id === rowId) ?? editProcut;
         seteditProcut(filteredProduct);
     }, [productStore, rowId]);
 
@@ -75,11 +80,11 @@ const EditModal = ({
                             onClick={() => setOpen(false)}
                             className='hover:text-red-500 cursor-pointer absolute top-5 right-5' icon='ph:x-light' height={24} />
                         <h2 className='text-2xl text-black font-bold whitespace-nowrap text-ellipsis overflow-hidden w-[580px]'>
-                            {product_name}
+                            {editProcut?.product_name}
                         </h2>
-                        <p className='text-lg'>{brand}</p>
+                        <p className='text-lg'>{editProcut?.brand}</p>
                         <div className='flex'>
-                            <Image alt={product_name} src={'/Avocado.jpg'}
+                            <Image alt={editProcut?.product_name} src={'/Avocado.jpg'}
                                 height={200} width={200} />
                             <div className='flex ml-5 mt-5 flex-col gap-5 flex-grow w-full'>
                                 <div className='grid grid-cols-2 w-full items-center'>
@@ -146,7 +151,7 @@ const EditModal = ({
 
 
                                             }}
-                                            placeholder={total} />
+                                        />
 
                                     </div>
                                 </div>

@@ -1,9 +1,9 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
 
 import React, { useEffect, useState } from 'react'
-import TableRow, { TableRowProps } from './TableRow'
+import TableRow from './TableRow'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProducts, setProducts } from '@/redux/productSlice';
+import { Product, selectProducts, setProducts } from '@/redux/productSlice';
 
 const TableComponent = () => {
 
@@ -72,16 +72,10 @@ const TableComponent = () => {
 
                         {
                             filteredProducts.length >= 1 ?
-                                filteredProducts?.map((row: TableRowProps) => {
+                                filteredProducts?.map((row: Product) => {
                                     return <TableRow
-                                        brand={row.brand}
                                         key={row.id}
-                                        price={row.price}
-                                        product_name={row.product_name}
-                                        quantity={row.quantity}
-                                        total={row.total}
                                         rowId={row.id ?? 0}
-                                        status={row.status}
                                     />
                                 }) :
                                 <p>No Data</p>
