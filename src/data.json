@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
+      "product_name": "Chicken Breast 1 Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "60.67",
       "quantity": "0",
@@ -11,7 +11,7 @@
     },
     {
       "id": 2,
-      "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
+      "product_name": "Chicken Breast 2 Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "60.67",
       "quantity": "15",
@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
+      "product_name": "Chicken Breast 3 Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "60.67",
       "quantity": "15",
@@ -29,7 +29,7 @@
     },
     {
       "id": 4,
-      "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
+      "product_name": "Chicken Breast 4 Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "60.67",
       "quantity": "0",
@@ -38,7 +38,7 @@
     },
     {
       "id": 5,
-      "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
+      "product_name": "Chicken Breast 5 Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "60.67",
       "quantity": "13",
@@ -47,20 +47,20 @@
     },
     {
       "id": 6,
-      "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
+      "product_name": "Chicken Breast 6 Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "10.48",
       "quantity": "13",
-      "total": "",
+      "total": "12",
       "status": "none"
     },
     {
       "id": 7,
-      "product_name": "Chicken Breast Fillets, Boneless matuu",
+      "product_name": "Chicken Breast 7 Fillets, Boneless matuu",
       "brand": "Hormel Black. 60.67,",
       "price": "60.67",
       "quantity": "13",
-      "total": "",
+      "total": "100",
       "status": "none"
     }
   ]

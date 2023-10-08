@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TableRow, { TableRowProps } from './TableRow'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProducts, setProducts } from '@/redux/productSlice';
@@ -9,6 +9,7 @@ const TableComponent = () => {
 
     const dispatch = useDispatch();
     const productStore = useSelector(selectProducts);
+    const [searchInput, setSearchInput] = useState<string>('');
 
     console.log(productStore)
     const fetchData = async () => {
@@ -23,6 +24,11 @@ const TableComponent = () => {
 
     };
 
+    const filteredProducts = productStore.filter((product) =>
+        product.product_name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -35,6 +41,8 @@ const TableComponent = () => {
                     <div className='border flex w-[300px] h-9 p-1 items-center 
                     border-gray-300 rounded-full'>
                         <input type="text" placeholder='Serach...'
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                             className='px-3 text-xs border-none outline-none h-full w-[260px]' />
                         <Icon color='#6b7280' className='h-full' icon="circum:search" />
                     </div>
@@ -63,18 +71,20 @@ const TableComponent = () => {
                     <tbody className=''>
 
                         {
-                            productStore?.map((row: TableRowProps) => {
-                                return <TableRow
-                                    brand={row.brand}
-                                    key={row.id}
-                                    price={row.price}
-                                    product_name={row.product_name}
-                                    quantity={row.quantity}
-                                    total={row.total}
-                                    rowId={row.id ?? 0}
-                                    status={row.status}
-                                />
-                            })
+                            filteredProducts.length > 1 ?
+                                filteredProducts?.map((row: TableRowProps) => {
+                                    return <TableRow
+                                        brand={row.brand}
+                                        key={row.id}
+                                        price={row.price}
+                                        product_name={row.product_name}
+                                        quantity={row.quantity}
+                                        total={row.total}
+                                        rowId={row.id ?? 0}
+                                        status={row.status}
+                                    />
+                                }) :
+                                <p>No Data</p>
                         }
 
 
