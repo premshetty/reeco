@@ -71,9 +71,9 @@ const TableRow: React.FC<TableRowProps> = ({
                     className='w-[30px!important] min-w-[30px]' height={30} width={30} />
             </td>
             <td className='max-w-[300px] text-sm w-[300px]'>{product_name}</td>
-            <td className='max-w-[300px] text-sm'>{brand}</td>
-            <td className='max-w-[300px] whitespace-nowrap text-sm'>{price}</td>
-            <td className='max-w-[300px] text-sm'>{quantity}</td>
+            <td className='max-w-[300px] text-sm w-[150px]'>{brand}</td>
+            <td className='max-w-[300px] whitespace-nowrap text-sm'>{`${price} / 6*1LB`}</td>
+            <td className='max-w-[300px] text-sm whitespace-nowrap'>{`${quantity} x6*1LB`}</td>
             <td className='max-w-[300px] text-sm'>{total}</td>
             <td className='max-w-[300px] text-sm '>
                 <StatusPill />

@@ -10,7 +10,7 @@ const TableComponent = () => {
     const dispatch = useDispatch();
     const productStore = useSelector(selectProducts);
 
-
+    console.log(productStore)
     const fetchData = async () => {
 
         const response = await fetch('/api/data');
