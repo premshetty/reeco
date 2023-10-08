@@ -90,7 +90,7 @@ const TableRow = ({ rowId }: { rowId: number }) => {
                     <Icon
                         className={`hover:text-green-500 cursor-pointer`}
                         onClick={() => setStatus('Approved')}
-                        color={status !== 'none' ? bgColor : ''}
+                        color={currentRow?.status === 'Approved' ? 'green' : ''}
                         icon='teenyicons:tick-solid'
                         height={24}
                     />
