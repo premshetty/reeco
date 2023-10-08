@@ -1,23 +1,29 @@
-import React, { useState } from 'react'
-import { Status, TableRowProps } from './TableRow'
-import { Icon } from '@iconify/react/dist/iconify.js'
-import Image from 'next/image'
-
-
+import React from 'react';
+import { Status, TableRowProps } from './TableRow';
+import { Icon } from '@iconify/react/dist/iconify.js';
+import Image from 'next/image';
 
 type Props = {
-    open: boolean
-    setOpen: (open: boolean) => void
-    setStatus: (status: Status) => void
-    status: Status
-}
-const EditModal = ({ open, setOpen, product_name, setStatus, status,
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    setStatus: (status: Status) => void;
+    status: Status;
+    rowId: number;
+
+};
+
+const EditModal = ({
+    open,
+    setOpen,
+    product_name,
+    setStatus,
+    status,
+    rowId,
     brand,
     price,
     quantity,
     total,
 }: Props & TableRowProps) => {
-    console.log(status)
 
     return (
         <div className={`fixed z-10 overflow-y-auto top-0 w-full left-0 ${open ? 'block' : 'hidden'}`} id="modal">
@@ -62,10 +68,11 @@ const EditModal = ({ open, setOpen, product_name, setStatus, status,
                                     </div>
                                 </div>
                                 <div className='grid grid-cols-2 w-full items-center'>
-                                    <p>Price $</p>
+                                    <p>Total</p>
                                     <div className='flex items-center gap-2'>
-                                        <input className='border  border-gray-300 rounded-lg p-2 w-32' type='text' placeholder={price.split('/')[0]} />
-                                        <p>/6.1LB</p>
+                                        <input className='border  border-gray-300 rounded-lg p-2 w-32' type='text'
+                                            placeholder={total} />
+
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +105,14 @@ const EditModal = ({ open, setOpen, product_name, setStatus, status,
                             <button className='border px-4 py-2  border-gray-300 rounded-full'>
                                 Other
                             </button>
+                        </div>
+                        <div className='flex justify-end w-full gap-4 mt-10'>
+
+                            <button
+                                onClick={() => setOpen(false)}
+                                className='text-green-800 font-bold'>Cancel</button>
+                            <button
+                                className='bg-green-800 text-white px-6 py-2 rounded-full font-bold'>Send</button>
                         </div>
                     </div>
                 </div>

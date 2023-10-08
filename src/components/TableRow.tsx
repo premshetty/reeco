@@ -11,7 +11,7 @@ export interface TableRowProps {
     quantity: string;
     total: string;
     id?: number
-
+    rowId?: number
 }
 
 export type Status = 'Missing-urgent' | 'Approved' | 'Missing' | 'Price Updated' | 'Quality Updated' | 'none';
@@ -23,6 +23,7 @@ const TableRow: React.FC<TableRowProps> = ({
     price,
     quantity,
     total,
+    rowId
 
 }) => {
 
@@ -100,6 +101,8 @@ const TableRow: React.FC<TableRowProps> = ({
                 total={total}
                 setStatus={setStatus}
                 status={status}
+
+                rowId={rowId ?? 0}
                 open={editOepn} setOpen={seteditOepn} />
             <UrgentModal setStatus={setStatus} open={urgentOpen} setOpen={seturgentOpen} />
         </tr>

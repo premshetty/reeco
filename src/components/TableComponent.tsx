@@ -1,12 +1,15 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import TableRow, { TableRowProps } from './TableRow'
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProducts, setProducts } from '@/redux/productSlice';
 
 const TableComponent = () => {
 
+    const dispatch = useDispatch();
+    const productStore = useSelector(selectProducts);
 
-    const [product, setProduct] = useState([])
 
     const fetchData = async () => {
 
@@ -16,7 +19,7 @@ const TableComponent = () => {
         }
 
         const data = await response.json();
-        setProduct(data?.products);
+        dispatch(setProducts(data?.products));
 
     };
 
@@ -60,7 +63,7 @@ const TableComponent = () => {
                     <tbody className=''>
 
                         {
-                            product.map((row: TableRowProps) => {
+                            productStore?.map((row: TableRowProps) => {
                                 return <TableRow
                                     brand={row.brand}
                                     key={row.id}
@@ -68,6 +71,7 @@ const TableComponent = () => {
                                     product_name={row.product_name}
                                     quantity={row.quantity}
                                     total={row.total}
+                                    rowId={row.id ?? 0}
                                 />
                             })
                         }
