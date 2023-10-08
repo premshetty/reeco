@@ -72,6 +72,7 @@ const TableComponent = () => {
                                     quantity={row.quantity}
                                     total={row.total}
                                     rowId={row.id ?? 0}
+                                    status={row.status}
                                 />
                             })
                         }

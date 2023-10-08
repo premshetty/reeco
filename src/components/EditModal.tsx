@@ -8,29 +8,22 @@ import { Product, selectProducts, setProducts } from '@/redux/productSlice';
 type Props = {
     open: boolean;
     setOpen: (open: boolean) => void;
-    setStatus: (status: Status) => void;
-    status: Status;
     rowId: number;
-    // Add other props as needed
 };
 
 const EditModal = ({
     open,
     setOpen,
     product_name,
-    setStatus,
-    status,
     rowId,
     brand,
-    price,
-    quantity,
     total,
 }: Props & TableRowProps) => {
     const dispatch = useDispatch();
     const productStore = useSelector(selectProducts);
     const [editProcut, seteditProcut] = useState<Product>();
 
-
+    console.log(editProcut)
     const incrementQuantity = () => {
         if (editProcut?.quantity) {
             seteditProcut({
@@ -170,18 +163,48 @@ const EditModal = ({
 
                             <button
 
-                                onClick={() => setStatus('Missing')}
-                                className={`${status === 'Missing' ? 'bg-red-500 text-white' : ''} border px-4 py-2  border-gray-300 rounded-full`}>
+                                onClick={() => {
+                                    if (editProcut?.status) {
+                                        seteditProcut({
+                                            ...editProcut,
+                                            status: 'Missing',
+                                        });
+                                    }
+
+
+                                }
+                                }
+                                className={`${editProcut?.status === 'Missing' ? 'bg-red-500 text-white' : ''} border px-4 py-2  border-gray-300 rounded-full`}>
                                 Missing Product
                             </button>
                             <button
-                                onClick={() => setStatus('Quality Updated')}
-                                className={`${status === 'Quality Updated' ? 'bg-red-500 text-white' : ''} border px-4 py-2  border-gray-300 rounded-full`}>
+                                onClick={() => {
+                                    if (editProcut?.status) {
+                                        seteditProcut({
+                                            ...editProcut,
+                                            status: 'Quality Updated',
+                                        });
+                                    }
+
+
+                                }
+                                }
+                                className={`${editProcut?.status === 'Quality Updated' ? 'bg-red-500 text-white' : ''} border px-4 py-2  border-gray-300 rounded-full`}>
                                 Quality is not the same
                             </button>
                             <button
-                                onClick={() => setStatus('Price Updated')}
-                                className={`${status === 'Price Updated' ? 'bg-red-500 text-white' : ''} border px-4 py-2  border-gray-300 rounded-full`}>
+                                onClick={() => {
+                                    if (editProcut?.status) {
+                                        seteditProcut({
+                                            ...editProcut,
+                                            status: 'Price Updated',
+                                        });
+                                    }
+
+
+                                }
+                                }
+                                className={`${editProcut?.status === 'Price Updated' ? 'bg-red-500 text-white' : ''} border px-4 py-2  border-gray-300 rounded-full`}>
                                 Price is not the same
                             </button>
                             <button className='border px-4 py-2  border-gray-300 rounded-full'>

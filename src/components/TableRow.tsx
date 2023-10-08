@@ -3,6 +3,8 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import EditModal from './EditModal';
 import UrgentModal from './UrgentModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProducts, setProducts } from '@/redux/productSlice';
 
 export interface TableRowProps {
     product_name: string;
@@ -12,6 +14,7 @@ export interface TableRowProps {
     total: string;
     id?: number
     rowId?: number
+    status?: Status
 }
 
 export type Status = 'Missing-urgent' | 'Approved' | 'Missing' | 'Price Updated' | 'Quality Updated' | 'none';
@@ -23,15 +26,25 @@ const TableRow: React.FC<TableRowProps> = ({
     price,
     quantity,
     total,
-    rowId
+    rowId,
+    status
 
 }) => {
 
 
-    const [status, setStatus] = useState<Status>('none');
     const [editOepn, seteditOepn] = useState<boolean>(false);
     const [urgentOpen, seturgentOpen] = useState<boolean>(false);
+    const productStore = useSelector(selectProducts);
 
+    const dispatch = useDispatch();
+
+    const setStatus = (status: Status) => {
+        const updatedProducts = productStore.map((product) =>
+            product.id === rowId ? { ...product, status: status } : product
+        );
+
+        dispatch(setProducts(updatedProducts));
+    }
 
 
     let bgColor: string;
@@ -99,8 +112,8 @@ const TableRow: React.FC<TableRowProps> = ({
                 product_name={product_name}
                 quantity={quantity}
                 total={total}
-                setStatus={setStatus}
-                status={status}
+
+
 
                 rowId={rowId ?? 0}
                 open={editOepn} setOpen={seteditOepn} />

@@ -7,7 +7,7 @@
       "price": "60.67",
       "quantity": "0",
       "total": "9000.88",
-      "status": ""
+      "status": "none"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "price": "60.67",
       "quantity": "15",
       "total": "9000.88",
-      "status": ""
+      "status": "none"
     },
     {
       "id": 3,
@@ -25,16 +25,16 @@
       "price": "60.67",
       "quantity": "15",
       "total": "12,654.32",
-      "status": ""
+      "status": "none"
     },
     {
       "id": 4,
       "product_name": "Chicken Breast Fillets, Boneless matuu maMarinated 6 Ounce Raw, Invivid",
       "brand": "Hormel Black Labelmany",
       "price": "60.67",
-      "quantity": "O",
+      "quantity": "0",
       "total": "12,654.32",
-      "status": ""
+      "status": "none"
     },
     {
       "id": 5,
@@ -43,7 +43,7 @@
       "price": "60.67",
       "quantity": "13",
       "total": "12,654.32",
-      "status": ""
+      "status": "none"
     },
     {
       "id": 6,
@@ -52,7 +52,7 @@
       "price": "10.48",
       "quantity": "13",
       "total": "",
-      "status": ""
+      "status": "none"
     },
     {
       "id": 7,
@@ -61,7 +61,7 @@
       "price": "60.67",
       "quantity": "13",
       "total": "",
-      "status": ""
+      "status": "none"
     }
   ]
 }

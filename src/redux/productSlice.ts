@@ -1,4 +1,5 @@
 // redux/productSlice.ts
+import { Status } from "@/components/TableRow";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ProductState {
@@ -12,6 +13,7 @@ export interface Product {
   quantity: string;
   total: string;
   id?: number;
+  status?: Status;
 }
 
 const initialState: ProductState = {
